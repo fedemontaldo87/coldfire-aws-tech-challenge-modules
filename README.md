@@ -1,22 +1,5 @@
-# Terraform VPC Module – Coldfire Challenge
+# Coldfire AWS Tech Challenge – Terraform Modules
 
-Reusable VPC module including:
+[![Validate Terraform Modules](https://github.com/fedemontaldo87/coldfire-aws-tech-challenge-modules/actions/workflows/validate-modules.yml/badge.svg)](https://github.com/fedemontaldo87/coldfire-aws-tech-challenge-modules/actions/workflows/validate-modules.yml)
 
-- VPC creation
-- Public and private subnets across 2 AZs
-- Internet Gateway
-- NAT Gateway
-- Route Tables with associations
-
-## Variables
-
-- `vpc_cidr`: CIDR block for the VPC
-- `public_subnet_cidrs`: List of CIDRs for public subnets
-- `private_subnet_cidrs`: List of CIDRs for private subnets
-- `azs`: List of availability zones to use
-
-## Outputs
-
-- `vpc_id`
-- `public_subnet_ids`
-- `private_subnet_ids`
+This repository contains a set of reusable Terraform modules for AWS, as part of the Coldfire AWS Technical Challenge – July 2025.

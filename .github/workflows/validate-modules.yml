@@ -1,0 +1,49 @@
+name: ✅ Validate Terraform Modules
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    paths:
+      - 'terraform-aws-*/**'
+      - 'test/**'
+
+jobs:
+  test-modules:
+    name: "🧪 Test module - ${{ matrix.module }}"
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        module:
+          - alb
+          - asg
+          - cloudwatch
+          - ec2
+          - iam_role
+          - s3
+          - security_group
+          - vpc
+
+    steps:
+      - name: ⬇️ Checkout code
+        uses: actions/checkout@v4
+
+      - name: 🧪 Set up Go
+        uses: actions/setup-go@v5
+        with:
+          go-version: '1.22'
+
+      - name: 🛠️ Set up Terraform
+        uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_version: 1.7.4
+
+      - name: 🔐 Configure dummy AWS credentials
+        run: |
+          chmod +x terraform-aws-${{ matrix.module }}/test/${{ matrix.module }}/create_dummy_profile.sh || true
+          terraform-aws-${{ matrix.module }}/test/${{ matrix.module }}/create_dummy_profile.sh || true
+
+      - name: ✅ Run Go Terratest
+        working-directory: terraform-aws-${{ matrix.module }}/test/${{ matrix.module }}
+        run: go test -v
