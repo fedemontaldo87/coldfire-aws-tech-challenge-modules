@@ -1,35 +1,42 @@
 name: ✅ Validate Terraform Modules
 
 on:
-  push:
-    branches: [main]
   pull_request:
     paths:
       - 'terraform-aws-*/**'
-      - 'test/**'
+      - '**/test/**'
+  push:
+    branches: [ main ]
 
 jobs:
   test-modules:
-    name: "🧪 Test module - ${{ matrix.module }}"
     runs-on: ubuntu-latest
 
     strategy:
       matrix:
-        module:
-          - alb
-          - asg
-          - cloudwatch
-          - ec2
-          - iam_role
-          - s3
-          - security_group
-          - vpc
+        include:
+          - module: alb
+            path: terraform-aws-alb
+          - module: asg
+            path: terraform-aws-asg
+          - module: cloudwatch
+            path: terraform-aws-cloudwatch-monitoring
+          - module: ec2
+            path: terraform-aws-ec2-instance
+          - module: iam_role
+            path: terraform-aws-iam-roles
+          - module: s3
+            path: terraform-aws-s3
+          - module: security_group
+            path: terraform-aws-security-groups
+          - module: vpc
+            path: terraform-aws-vpc
 
     steps:
-      - name: ⬇️ Checkout code
+      - name: 🛎️ Checkout code
         uses: actions/checkout@v4
 
-      - name: 🧪 Set up Go
+      - name: 🧰 Set up Go
         uses: actions/setup-go@v5
         with:
           go-version: '1.22'
@@ -41,9 +48,14 @@ jobs:
 
       - name: 🔐 Configure dummy AWS credentials
         run: |
-          chmod +x terraform-aws-${{ matrix.module }}/test/${{ matrix.module }}/create_dummy_profile.sh || true
-          terraform-aws-${{ matrix.module }}/test/${{ matrix.module }}/create_dummy_profile.sh || true
+          SCRIPT_PATH=${{ matrix.path }}/test/${{ matrix.module }}/create_dummy_profile.sh
+          if [ -f "$SCRIPT_PATH" ]; then
+            chmod +x "$SCRIPT_PATH"
+            "$SCRIPT_PATH"
+          else
+            echo "⚠️ No create_dummy_profile.sh script found for ${{ matrix.module }}"
+          fi
 
-      - name: ✅ Run Go Terratest
-        working-directory: terraform-aws-${{ matrix.module }}/test/${{ matrix.module }}
+      - name: ✅ Run Go Terratest for ${{ matrix.module }}
+        working-directory: ${{ matrix.path }}/test/${{ matrix.module }}
         run: go test -v
