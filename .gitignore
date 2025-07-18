@@ -1,0 +1,34 @@
+# Terraform global (en cualquier subdirectorio)
+**/.terraform/
+**/.terraform.lock.hcl
+**/*.tfstate
+**/*.tfstate.backup
+
+# Terraform docs
+**/.terraform-docs.yml
+
+# Terraform plan y logs
+**/*.tfplan
+**/plan.*
+**/*.log
+**/*.out
+**/crash.log
+
+# IDEs y editores
+**/.vscode/
+**/.idea/
+**/*.swp
+**/*.bak
+
+# Python caches
+**/__pycache__/
+**/*.pyc
+**/*.pyo
+
+# Node/JS (si hacés gráficos o algo con npm)
+**/node_modules/
+**/dist/
+
+# Sistema
+**/.DS_Store
+**/Thumbs.db
