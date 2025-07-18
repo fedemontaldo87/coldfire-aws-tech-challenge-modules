@@ -41,14 +41,14 @@ Terraform Documentation
 
 | Name | Version |
 |------|---------|
-| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.5.0 |
-| <a name="requirement_aws"></a> [aws](#requirement\_aws) | ~> 5.0 |
+| terraform | >= 1.5.0 |
+| aws | ~> 5.0 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| <a name="provider_aws"></a> [aws](#provider\_aws) | 5.100.0 |
+| aws | ~> 5.0 |
 
 ## Resources
 
@@ -62,18 +62,18 @@ Terraform Documentation
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| <a name="input_internal"></a> [internal](#input\_internal) | Define si el ALB es interno o externo | `bool` | `false` | no |
-| <a name="input_name"></a> [name](#input\_name) | Nombre base del ALB | `string` | n/a | yes |
-| <a name="input_region"></a> [region](#input\_region) | La región de AWS donde se desplegará la infraestructura | `string` | `"us-east-1"` | no |
-| <a name="input_security_groups"></a> [security\_groups](#input\_security\_groups) | Lista de SGs para el ALB | `list(string)` | n/a | yes |
-| <a name="input_subnet_ids"></a> [subnet\_ids](#input\_subnet\_ids) | Lista de subnets públicas para el ALB | `list(string)` | n/a | yes |
-| <a name="input_vpc_id"></a> [vpc\_id](#input\_vpc\_id) | VPC donde se desplegará el ALB | `string` | n/a | yes |
+| internal | Indicates whether the ALB is internal or internet-facing | `bool` | `false` | no |
+| name | Base name for the ALB | `string` | n/a | yes |
+| region | AWS region where the infrastructure will be deployed | `string` | `"us-east-1"` | no |
+| security_groups | List of security groups to attach to the ALB | `list(string)` | n/a | yes |
+| subnet_ids | List of public subnets for the ALB | `list(string)` | n/a | yes |
+| vpc_id | VPC where the ALB will be deployed | `string` | n/a | yes |
 
 ## Outputs
 
 | Name | Description |
 |------|-------------|
-| <a name="output_alb_arn"></a> [alb\_arn](#output\_alb\_arn) | n/a |
-| <a name="output_alb_dns_name"></a> [alb\_dns\_name](#output\_alb\_dns\_name) | DNS del ALB |
-| <a name="output_alb_target_group_arn"></a> [alb\_target\_group\_arn](#output\_alb\_target\_group\_arn) | n/a |
+| alb_arn | n/a |
+| alb_dns_name | DNS del ALB |
+| alb_target_group_arn | n/a |
 <!-- END_TF_DOCS -->

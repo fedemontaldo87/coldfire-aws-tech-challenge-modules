@@ -39,14 +39,14 @@ module "vpc" {
 
 | Name | Version |
 |------|---------|
-| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.5.0 |
-| <a name="requirement_aws"></a> [aws](#requirement\_aws) | ~> 5.0 |
+| terraform | >= 1.5.0 |
+| aws | ~> 5.0 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| <a name="provider_aws"></a> [aws](#provider\_aws) | ~> 5.0 |
+| aws | 5.100.0 |
 
 ## Resources
 
@@ -67,16 +67,17 @@ module "vpc" {
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| <a name="input_azs"></a> [azs](#input\_azs) | List of Availability Zones to use (e.g., ["us-east-1a", "us-east-1b"]) | `list(string)` | n/a | yes |
-| <a name="input_private_subnet_cidrs"></a> [private\_subnet\_cidrs](#input\_private\_subnet\_cidrs) | List of CIDR blocks for private subnets | `list(string)` | n/a | yes |
-| <a name="input_public_subnet_cidrs"></a> [public\_subnet\_cidrs](#input\_public\_subnet\_cidrs) | List of CIDR blocks for public subnets | `list(string)` | n/a | yes |
-| <a name="input_vpc_cidr"></a> [vpc\_cidr](#input\_vpc\_cidr) | CIDR block for the VPC | `string` | n/a | yes |
+| azs | List of Availability Zones to use (e.g., ["us-east-1a", "us-east-1b"]) | `list(string)` | n/a | yes |
+| private_subnet_cidrs | List of CIDR blocks for private subnets | `list(string)` | n/a | yes |
+| public_subnet_cidrs | List of CIDR blocks for public subnets | `list(string)` | n/a | yes |
+| region | Región de AWS donde se desplegará la infraestructura | `string` | n/a | yes |
+| vpc_cidr | CIDR block for the VPC | `string` | n/a | yes |
 
 ## Outputs
 
 | Name | Description |
 |------|-------------|
-| <a name="output_private_subnet_ids"></a> [private\_subnet\_ids](#output\_private\_subnet\_ids) | List of private subnet IDs |
-| <a name="output_public_subnet_ids"></a> [public\_subnet\_ids](#output\_public\_subnet\_ids) | List of public subnet IDs |
-| <a name="output_vpc_id"></a> [vpc\_id](#output\_vpc\_id) | ID of the VPC |
+| private_subnet_ids | List of private subnet IDs |
+| public_subnet_ids | List of public subnet IDs |
+| vpc_id | ID of the VPC |
 <!-- END_TF_DOCS -->

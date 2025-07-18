@@ -36,14 +36,14 @@ module "cloudwatch_monitoring" {
 
 | Name | Version |
 |------|---------|
-| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.5.0 |
-| <a name="requirement_aws"></a> [aws](#requirement\_aws) | ~> 5.0 |
+| terraform | >= 1.5.0 |
+| aws | ~> 5.0 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| <a name="provider_aws"></a> [aws](#provider\_aws) | 5.100.0 |
+| aws | 5.100.0 |
 
 ## Resources
 
@@ -60,17 +60,17 @@ module "cloudwatch_monitoring" {
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| <a name="input_alarm_cpu_threshold"></a> [alarm\_cpu\_threshold](#input\_alarm\_cpu\_threshold) | CPU usage percentage that triggers a high alarm | `number` | `80` | no |
-| <a name="input_alert_email"></a> [alert\_email](#input\_alert\_email) | Email address to receive CloudWatch alerts | `string` | n/a | yes |
-| <a name="input_asg_name"></a> [asg\_name](#input\_asg\_name) | Name of the Auto Scaling Group to monitor | `string` | n/a | yes |
-| <a name="input_cpu_low_threshold"></a> [cpu\_low\_threshold](#input\_cpu\_low\_threshold) | CPU usage percentage that triggers a low alarm | `number` | `10` | no |
-| <a name="input_prefix"></a> [prefix](#input\_prefix) | Prefix to use for resource names (e.g., project or environment name) | `string` | n/a | yes |
-| <a name="input_region"></a> [region](#input\_region) | AWS region where resources will be deployed | `string` | n/a | yes |
+| alarm_cpu_threshold | CPU usage percentage that triggers a high alarm | `number` | `80` | no |
+| alert_email | Email address to receive CloudWatch alerts | `string` | n/a | yes |
+| asg_name | Name of the Auto Scaling Group to monitor | `string` | n/a | yes |
+| cpu_low_threshold | CPU usage percentage that triggers a low alarm | `number` | `10` | no |
+| prefix | Prefix to use for resource names (e.g., project or environment name) | `string` | n/a | yes |
+| region | AWS region where resources will be deployed | `string` | n/a | yes |
 
 ## Outputs
 
 | Name | Description |
 |------|-------------|
-| <a name="output_cloudwatch_alarm_names"></a> [cloudwatch\_alarm\_names](#output\_cloudwatch\_alarm\_names) | Names of the CloudWatch alarms |
-| <a name="output_sns_topic_arn"></a> [sns\_topic\_arn](#output\_sns\_topic\_arn) | ARN of the SNS topic used for CloudWatch notifications |
+| cloudwatch_alarm_names | Names of the CloudWatch alarms |
+| sns_topic_arn | ARN of the SNS topic used for CloudWatch notifications |
 <!-- END_TF_DOCS -->

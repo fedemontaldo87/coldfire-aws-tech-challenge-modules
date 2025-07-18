@@ -37,14 +37,14 @@ module "s3_bucket" {
 
 | Name | Version |
 |------|---------|
-| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.5.0 |
-| <a name="requirement_aws"></a> [aws](#requirement\_aws) | ~> 5.0 |
+| terraform | >= 1.5.0 |
+| aws | ~> 5.0 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| <a name="provider_aws"></a> [aws](#provider\_aws) | 5.100.0 |
+| aws | 5.100.0 |
 
 ## Resources
 
@@ -63,13 +63,13 @@ module "s3_bucket" {
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| <a name="input_prefix"></a> [prefix](#input\_prefix) | Prefix for naming the S3 buckets | `string` | n/a | yes |
-| <a name="input_region"></a> [region](#input\_region) | Región de AWS donde se desplegará la infraestructura | `string` | n/a | yes |
+| prefix | Prefix for naming the S3 buckets | `string` | n/a | yes |
+| region | Región de AWS donde se desplegará la infraestructura | `string` | n/a | yes |
 
 ## Outputs
 
 | Name | Description |
 |------|-------------|
-| <a name="output_images_bucket_name"></a> [images\_bucket\_name](#output\_images\_bucket\_name) | The name of the S3 bucket for images |
-| <a name="output_logs_bucket_name"></a> [logs\_bucket\_name](#output\_logs\_bucket\_name) | The name of the S3 bucket for logs |
+| images_bucket_name | The name of the S3 bucket for images |
+| logs_bucket_name | The name of the S3 bucket for logs |
 <!-- END_TF_DOCS -->
