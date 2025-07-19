@@ -8,25 +8,61 @@ on:
   push:
     branches: [ main ]
 
+permissions:
+  contents: read
+  pull-requests: write
+  checks: write
+  actions: read
+  id-token: write
+
 jobs:
   test-modules:
     runs-on: ubuntu-latest
-    permissions:
-      security-events: write
-      contents: read
 
     strategy:
       matrix:
         include:
           - module: alb
             path: terraform-aws-alb
-          # ... other modules ...
+          - module: asg
+            path: terraform-aws-asg
+          - module: cloudwatch
+            path: terraform-aws-cloudwatch-monitoring
+          - module: ec2
+            path: terraform-aws-ec2-instance
+          - module: iam_role
+            path: terraform-aws-iam-roles
+          - module: s3
+            path: terraform-aws-s3
+          - module: security_group
+            path: terraform-aws-security-groups
+          - module: vpc
+            path: terraform-aws-vpc
 
     steps:
       - name: 🛎️ Checkout code
         uses: actions/checkout@v4
 
-      # ... other steps ...
+      - name: 🧰 Set up Go
+        uses: actions/setup-go@v5
+        with:
+          go-version: '1.22'
+          cache: false
+
+      - name: 🛠️ Set up Terraform
+        uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_version: 1.7.4
+
+      - name: 🔐 Configure dummy AWS credentials
+        run: |
+          SCRIPT_PATH=${{ matrix.path }}/test/${{ matrix.module }}/create_dummy_profile.sh
+          if [ -f "$SCRIPT_PATH" ]; then
+            chmod +x "$SCRIPT_PATH"
+            "$SCRIPT_PATH"
+          else
+            echo "⚠️ No create_dummy_profile.sh script found for ${{ matrix.module }}"
+          fi
 
       - name: 🔍 Install tfsec
         run: |
