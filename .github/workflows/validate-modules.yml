@@ -41,8 +41,8 @@ jobs:
 
       - name: 🔐 Create dummy AWS profile
         run: |
-          chmod +x test/${{ matrix.module }}/create_dummy_profile.sh
-          ./test/${{ matrix.module }}/create_dummy_profile.sh
+          chmod +x terraform-aws-${{ matrix.module }}/test/${{ matrix.module }}/create_dummy_profile.sh
+          terraform-aws-${{ matrix.module }}/test/${{ matrix.module }}/create_dummy_profile.sh
 
       - name: ✅ Run Go Terratest
         working-directory: test/${{ matrix.module }}
