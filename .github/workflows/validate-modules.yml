@@ -8,16 +8,12 @@ on:
   push:
     branches: [ main ]
 
-permissions:
-  contents: read
-  pull-requests: write
-  checks: write
-  actions: read
-  id-token: write
-
 jobs:
   test-modules:
     runs-on: ubuntu-latest
+    permissions:
+      security-events: write
+      contents: read
 
     strategy:
       matrix:
@@ -74,11 +70,19 @@ jobs:
         working-directory: ${{ matrix.path }}
         run: tfsec . --format sarif --out tfsec-${{ matrix.module }}.sarif --soft-fail
 
+      - name: 🔑 Generate Security Token
+        id: generate_token
+        if: ${{ github.event_name == 'pull_request' }}
+        uses: tibdex/github-app-token@v2
+        with:
+          app_id: ${{ secrets.SECURITY_APP_ID }}
+          private_key: ${{ secrets.SECURITY_APP_KEY }}
+
       - name: 📤 Upload tfsec SARIF Report
-        if: ${{ github.event_name == 'push' || github.event.pull_request.head.repo.full_name == github.repository }}
         uses: github/codeql-action/upload-sarif@v3
         with:
           sarif_file: ${{ matrix.path }}/tfsec-${{ matrix.module }}.sarif
+          token: ${{github.event_name == 'push' && github.token || steps.generate_token.outputs.token}}
 
       - name: ✅ Run Go Terratest for ${{ matrix.module }}
         working-directory: ${{ matrix.path }}/test/${{ matrix.module }}
