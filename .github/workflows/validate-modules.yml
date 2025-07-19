@@ -17,7 +17,7 @@ jobs:
         module:
           - iam_role
           - vpc
-          - ec2
+          - ec2-instance
           - alb
           - s3
           - asg
