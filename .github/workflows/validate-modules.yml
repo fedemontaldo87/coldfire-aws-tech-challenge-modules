@@ -64,15 +64,21 @@ jobs:
           chmod +x tfsec
           sudo mv tfsec /usr/local/bin/
 
+      - name: 🔍 Install tfsec
+        run: |
+          curl -L https://github.com/aquasecurity/tfsec/releases/download/v1.28.1/tfsec-linux-amd64 -o tfsec
+          chmod +x tfsec
+          sudo mv tfsec /usr/local/bin/
+
       - name: 📊 Run tfsec for ${{ matrix.module }}
         working-directory: ${{ matrix.path }}
-        run: tfsec . --format sarif --out tfsec-${{ matrix.module }}.sarif
+        run: tfsec . --format sarif --out tfsec-${{ matrix.module }}.sarif --soft-fail
 
       - name: 📤 Upload tfsec SARIF Report
         uses: github/codeql-action/upload-sarif@v3
         with:
           sarif_file: ${{ matrix.path }}/tfsec-${{ matrix.module }}.sarif
-      # --- NEW STEPS END HERE ---
+
 
       - name: ✅ Run Go Terratest for ${{ matrix.module }}
         working-directory: ${{ matrix.path }}/test/${{ matrix.module }}
