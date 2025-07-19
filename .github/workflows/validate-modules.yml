@@ -8,6 +8,13 @@ on:
   push:
     branches: [ main ]
 
+permissions:
+  contents: read
+  pull-requests: write
+  checks: write
+  actions: read
+  id-token: write
+
 jobs:
   test-modules:
     runs-on: ubuntu-latest
