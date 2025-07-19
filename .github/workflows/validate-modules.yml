@@ -1,12 +1,12 @@
 name: ✅ Validate Terraform Modules
 
 on:
+  push:
+    branches: [ main ]
   pull_request:
     paths:
       - 'terraform-aws-*/**'
-      - '**/test/**'
-  push:
-    branches: [ main ]
+      - 'test/**'
 
 jobs:
   test-modules:
@@ -14,48 +14,55 @@ jobs:
 
     strategy:
       matrix:
-        include:
-          - module: alb
-            path: terraform-aws-alb
-          - module: asg
-            path: terraform-aws-asg
-          - module: cloudwatch
-            path: terraform-aws-cloudwatch-monitoring
-          - module: ec2
-            path: terraform-aws-ec2-instance
-          - module: iam_role
-            path: terraform-aws-iam-roles
-          - module: s3
-            path: terraform-aws-s3
-          - module: security_group
-            path: terraform-aws-security-groups
-          - module: vpc
-            path: terraform-aws-vpc
+        module:
+          - iam_role
+          - vpc
+          - ec2
+          - alb
+          - s3
+          - asg
+          - security_group
+          - cloudwatch
 
     steps:
-      - name: 🛎️ Checkout code
+      - name: 🧾 Checkout repo
         uses: actions/checkout@v4
 
       - name: 🧰 Set up Go
         uses: actions/setup-go@v5
         with:
           go-version: '1.22'
+          cache: false
 
-      - name: 🛠️ Set up Terraform
+      - name: ⛏️ Set up Terraform
         uses: hashicorp/setup-terraform@v3
         with:
           terraform_version: 1.7.4
 
-      - name: 🔐 Configure dummy AWS credentials
+      - name: 🔐 Create dummy AWS profile
         run: |
-          SCRIPT_PATH=${{ matrix.path }}/test/${{ matrix.module }}/create_dummy_profile.sh
-          if [ -f "$SCRIPT_PATH" ]; then
-            chmod +x "$SCRIPT_PATH"
-            "$SCRIPT_PATH"
-          else
-            echo "⚠️ No create_dummy_profile.sh script found for ${{ matrix.module }}"
-          fi
+          chmod +x test/${{ matrix.module }}/create_dummy_profile.sh
+          ./test/${{ matrix.module }}/create_dummy_profile.sh
 
-      - name: ✅ Run Go Terratest for ${{ matrix.module }}
-        working-directory: ${{ matrix.path }}/test/${{ matrix.module }}
+      - name: ✅ Run Go Terratest
+        working-directory: test/${{ matrix.module }}
         run: go test -v
+
+  tfsec-check:
+    name: 🔒 tfsec Static Security Analysis
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 🧾 Checkout repo
+        uses: actions/checkout@v4
+
+      - name: ⬇️ Install tfsec
+        run: |
+          curl -s https://raw.githubusercontent.com/aquasecurity/tfsec/master/scripts/install_linux.sh | bash
+
+      - name: 🚨 Run tfsec
+        run: |
+          for dir in terraform-aws-*; do
+            echo "🔍 Scanning $dir..."
+            tfsec "$dir"
+          done
