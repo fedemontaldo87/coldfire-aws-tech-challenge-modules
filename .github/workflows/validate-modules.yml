@@ -57,13 +57,6 @@ jobs:
             echo "⚠️ No create_dummy_profile.sh script found for ${{ matrix.module }}"
           fi
 
-      # --- NEW STEPS START HERE ---
-      - name: 🔍 Install tfsec
-        run: |
-          curl -L https://github.com/aquasecurity/tfsec/releases/download/v1.28.1/tfsec-linux-amd64 -o tfsec
-          chmod +x tfsec
-          sudo mv tfsec /usr/local/bin/
-
       - name: 🔍 Install tfsec
         run: |
           curl -L https://github.com/aquasecurity/tfsec/releases/download/v1.28.1/tfsec-linux-amd64 -o tfsec
@@ -78,7 +71,6 @@ jobs:
         uses: github/codeql-action/upload-sarif@v3
         with:
           sarif_file: ${{ matrix.path }}/tfsec-${{ matrix.module }}.sarif
-
 
       - name: ✅ Run Go Terratest for ${{ matrix.module }}
         working-directory: ${{ matrix.path }}/test/${{ matrix.module }}
