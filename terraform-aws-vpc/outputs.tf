@@ -14,21 +14,15 @@ output "private_subnet_ids" {
 }
 
 output "public_subnets" {
+  description = "Map of public subnets with custom keys"
   value = {
-    for i, subnet in aws_subnet.public : "sub${i+1}" => subnet
+    for i, subnet in aws_subnet.public : "sub${i + 1}" => subnet
   }
 }
 
 output "private_subnets" {
+  description = "Map of private subnets with custom keys"
   value = {
-    for i, subnet in aws_subnet.private : "sub${i+3}" => subnet
+    for i, subnet in aws_subnet.private : "sub${i + 3}" => subnet
   }
-}
-
-output "public_subnet_ids" {
-  value = [for s in aws_subnet.public : s.id]
-}
-
-output "private_subnet_ids" {
-  value = [for s in aws_subnet.private : s.id]
 }
