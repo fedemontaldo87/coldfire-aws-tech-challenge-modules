@@ -58,3 +58,40 @@ variable "region" {
   type    = string
   default = "us-east-1"
 }
+
+
+variable "alb_ingress_rules" {
+  type = list(object({
+    description      = string
+    from_port        = number
+    to_port          = number
+    protocol         = string
+    cidr_blocks      = list(string)
+    ipv6_cidr_blocks = list(string)
+  }))
+  default = []
+}
+
+variable "asg_ingress_rules" {
+  type = list(object({
+    description      = string
+    from_port        = number
+    to_port          = number
+    protocol         = string
+    cidr_blocks      = list(string)
+    ipv6_cidr_blocks = list(string)
+  }))
+  default = []
+}
+
+variable "ec2_ingress_rules" {
+  type = list(object({
+    description      = string
+    from_port        = number
+    to_port          = number
+    protocol         = string
+    cidr_blocks      = list(string)
+    ipv6_cidr_blocks = list(string)
+  }))
+  default = []
+}

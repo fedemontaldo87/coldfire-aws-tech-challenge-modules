@@ -15,3 +15,11 @@ output "custom_policy_arns" {
     can(aws_iam_policy.file_custom_policy)  ? [for p in aws_iam_policy.file_custom_policy : p.arn] : []
   )
 }
+
+output "ec2_logs_instance_profile_name" {
+  value = aws_iam_instance_profile.ec2_logs.name
+}
+
+output "asg_images_instance_profile_name" {
+  value = aws_iam_instance_profile.asg_images.name
+}
