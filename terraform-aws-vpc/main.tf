@@ -20,7 +20,7 @@ resource "aws_internet_gateway" "igw" {
 
 # Elastic IP for NAT
 resource "aws_eip" "nat" {
-  vpc = true
+  domain = "vpc"  # Fix: Cambiado de 'vpc = true' (deprecated) a 'domain = "vpc"'
 }
 
 # NAT Gateway in first public subnet

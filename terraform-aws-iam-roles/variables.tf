@@ -102,3 +102,15 @@ variable "inline_policy_json" {
   default     = ""
 }
 
+# Agregado: Policies específicas para logs e images (JSON strings)
+variable "logs_policy_json" {
+  description = "JSON policy for S3 logs write access (PutObject)"
+  type        = string
+  default     = ""  # Setear default vacío; pasar en call si se usa
+}
+
+variable "images_policy_json" {
+  description = "JSON policy for S3 images read access (GetObject)"
+  type        = string
+  default     = ""
+}
