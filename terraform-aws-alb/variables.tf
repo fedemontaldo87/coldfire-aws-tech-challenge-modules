@@ -29,3 +29,25 @@ variable "region" {
   type        = string
   default     = "us-east-1"
 }
+
+variable "listener_port" {
+  description = "Port on which the ALB listener will listen (e.g., 80 for HTTP)"
+  type        = number
+  default     = 80
+}
+
+variable "target_port" {
+  description = "Port on which traffic is forwarded to the targets (e.g., 443 for HTTPS)"
+  type        = number
+  default     = 80
+}
+
+variable "target_protocol" {
+  description = "Protocol for forwarding to targets (HTTP or HTTPS)"
+  type        = string
+  default     = "HTTP"
+  validation {
+    condition     = contains(["HTTP", "HTTPS"], var.target_protocol)
+    error_message = "Target protocol must be HTTP or HTTPS."
+  }
+}

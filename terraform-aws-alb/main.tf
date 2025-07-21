@@ -14,8 +14,8 @@ resource "aws_lb" "this" {
 
 resource "aws_lb_target_group" "this" {
   name     = "${var.name}-tg"
-  port     = 80
-  protocol = "HTTP"
+  port     = var.target_port  # Usamos la var para forwarding port
+  protocol = var.target_protocol  # HTTP o HTTPS
   vpc_id   = var.vpc_id
 
   health_check {
@@ -25,12 +25,13 @@ resource "aws_lb_target_group" "this" {
     healthy_threshold   = 2
     unhealthy_threshold = 2
     matcher             = "200"
+    protocol            = var.target_protocol  # Matchea con el protocol del target
   }
 }
 
 resource "aws_lb_listener" "http" {
   load_balancer_arn = aws_lb.this.arn
-  port              = 80
+  port              = var.listener_port  # Usamos la var para listener port
   protocol          = "HTTP"
 
   default_action {
