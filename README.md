@@ -33,6 +33,7 @@ CI pipeline: [.github/workflows/validate-modules.yml](.github/workflows/validate
 
 Each module follows the standard Terraform layout:
 
+```plaintext
 terraform-aws-<module>/
 ├── main.tf
 ├── variables.tf
@@ -41,8 +42,8 @@ terraform-aws-<module>/
 ├── provider.tf (optional)
 ├── README.md
 └── test/
-├── <module>_test.go
-└── create_dummy_profile.sh
+    ├── <module>_test.go
+    └── create_dummy_profile.sh
 
 
 All modules are versioned using Git and support `source` referencing for reuse in other Terraform projects.
@@ -64,6 +65,7 @@ If you want to test a module locally, you can use the create_dummy_profile.sh sc
 - AWS Provider: https://registry.terraform.io/providers/hashicorp/aws/latest/docs
 - AWS Diagrams: AWS Architecture Icons
 - Terratest: https://terratest.gruntwork.io/ (for automated infrastructure testing with Go).
+- terraform-docs: https://terraform-docs.io/ (A utility to generate documentation from Terraform modules in various output formats)
 
 ##  How to Automatically Update the README with terraform-docs
 
