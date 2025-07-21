@@ -2,7 +2,7 @@ resource "aws_launch_template" "this" {
   name_prefix   = var.name
   image_id      = var.ami_id
   instance_type = var.instance_type
-  key_name      = var.key_name
+  key_name      = var.key_name  # Ahora opcional
   user_data     = base64encode(var.user_data)
 
   iam_instance_profile {
@@ -12,6 +12,20 @@ resource "aws_launch_template" "this" {
   network_interfaces {
     associate_public_ip_address = true
     security_groups             = var.security_groups
+  }
+
+  # Agregado: Block device para root volume si volume_size se pasa
+  dynamic "block_device_mappings" {
+    for_each = var.volume_size != null ? [1] : []
+    content {
+      device_name = "/dev/sda1"  # Root device para la mayoría de AMIs
+
+      ebs {
+        volume_size = var.volume_size
+        volume_type = "gp3"  # Default type, puedes agregar var si quieres
+        delete_on_termination = true
+      }
+    }
   }
 
   tag_specifications {

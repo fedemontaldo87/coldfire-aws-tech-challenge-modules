@@ -17,6 +17,7 @@ variable "instance_type" {
 variable "key_name" {
   description = "Key pair name for SSH access"
   type        = string
+  default     = null  # Agregado: default null para hacerlo opcional
 }
 
 variable "user_data" {
@@ -63,4 +64,10 @@ variable "target_group_arns" {
 variable "region" {
   description = "AWS region"
   type        = string
+}
+
+variable "volume_size" {
+  description = "Size of the root volume in GB for ASG instances"
+  type        = number
+  default     = null  # Null para usar default de AWS/AMI si no se pasa
 }
