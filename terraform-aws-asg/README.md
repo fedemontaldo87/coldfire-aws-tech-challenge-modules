@@ -9,8 +9,6 @@ This module supports:
 - Associating security groups and subnets
 - Adding lifecycle hooks and instance protection (optional)
 
-## Supported Resources
-
 * [aws_launch_template](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/launch_template)
 * [aws_autoscaling_group](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/autoscaling_group)
 

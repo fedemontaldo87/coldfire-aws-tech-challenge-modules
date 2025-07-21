@@ -9,8 +9,6 @@ This module supports:
 - Adding custom tags
 - Optional monitoring
 
-These types of resources are supported:
-
 * [aws_instance](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/instance)
 * [aws_ami_copy](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/ami_copy)
 * [aws_ami](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/ami)

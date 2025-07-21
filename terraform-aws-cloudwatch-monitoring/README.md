@@ -9,8 +9,6 @@ This module supports:
 - Creating a CloudWatch dashboard with CPU metrics
 - Customizable thresholds and email notifications
 
-## Supported Resources
-
 * [aws_cloudwatch_metric_alarm](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/cloudwatch_metric_alarm)
 * [aws_cloudwatch_dashboard](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/cloudwatch_dashboard)
 * [aws_sns_topic](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/sns_topic)

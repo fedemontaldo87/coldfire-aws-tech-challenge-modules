@@ -10,8 +10,6 @@ This module supports:
 - Registering EC2 instances (or autoscaling groups)
 - Associating security groups and subnets
 
-
-
 * [aws_lb](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/lb)
 * [aws_lb_listener](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/lb_listener)
 * [aws_lb_target_group](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/lb_target_group)

@@ -69,5 +69,5 @@ variable "region" {
 variable "volume_size" {
   description = "Size of the root volume in GB for ASG instances"
   type        = number
-  default     = null  # Null para usar default de AWS/AMI si no se pasa
+  default     = null  
 }
