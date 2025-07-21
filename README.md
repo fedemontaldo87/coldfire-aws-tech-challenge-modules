@@ -65,7 +65,49 @@ If you want to test a module locally, you can use the create_dummy_profile.sh sc
 - AWS Diagrams: AWS Architecture Icons
 - Terratest: https://terratest.gruntwork.io/ (for automated infrastructure testing with Go).
 
----
+##  How to Automatically Update the README with terraform-docs
+
+This repository uses terraform-docs to automatically generate and update the Inputs and Outputs sections of the README file when changes are made to any Terraform module.
+
+To ensure that the README file is always up-to-date, follow the steps below:
+
+1- Create or Modify .terraform-docs.yml File
+
+Make sure the following configuration is included in your project. This file tells terraform-docs how to format the output:
+
+formatter: markdown
+output:
+  file: README.md
+  mode: inject
+settings:
+  anchor: false
+  color: false
+  default: true
+  description: true
+  escape: false
+  hide-empty: true
+  html: false
+  indent: 2
+  lockfile: true
+  output-values: true
+  read-comments: true
+  required: true
+  sensitive: true
+  type: true
+
+2- Update the README with terraform-docs
+
+After making any changes to a Terraform module, run the following command to automatically update the README.md:
+
+This command will:
+
+- Generate the Inputs and Outputs sections of the README file.
+- Inject the Terraform documentation content between the special markers.
+
+
+##  Example Format for Your README
+
+You will notice that terraform-docs will place the auto-generated content between these markers:
 
 <!-- BEGIN_TF_DOCS -->
 
@@ -85,17 +127,20 @@ If you want to test a module locally, you can use the create_dummy_profile.sh sc
 
 <!-- END_TF_DOCS -->
 
-Changes made:
+
+## Changes made:
 
     <!-- BEGIN_TF_DOCS --> and <!-- END_TF_DOCS --> were inserted after the References to Resources Used section.
 
-    The Inputs and Outputs sections now contain the placeholders for the auto-generated Terraform documentation.
+- <!-- BEGIN_TF_DOCS --> and <!-- END_TF_DOCS --> were inserted after the References to Resources Used section.
+- The Inputs and Outputs sections now contain placeholders for the auto-generated Terraform documentation.
 
-Now, when you run terraform-docs to generate the documentation, it will automatically inject the module's inputs and outputs between these markers.
-Next Steps:
+## Next Steps:
 
-    After making these changes, you can run terraform-docs to generate the documentation:
+- Run terraform-docs whenever you make changes to the module (such as adding new input variables or outputs).
+- This will automatically inject the Terraform-generated content into the specified locations in the README.
+- Ensure you commit and push any changes to the README after updating it.
 
-terraform-docs markdown ./ --output-file README.md --mode inject
+##  Why Use This Approach?
 
-This will inject the Terraform-generated content in the specified locations.
+By using terraform-docs, you ensure that your module documentation is always up-to-date and reflects the current state of your Terraform configuration. Every time you change your module (add a new variable, output, or resource), you can easily regenerate the README without manually editing it.
