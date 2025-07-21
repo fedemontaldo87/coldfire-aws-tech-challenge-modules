@@ -59,4 +59,43 @@ If you want to test a module locally, you can use the create_dummy_profile.sh sc
    go mod tidy
    go test -v
 
+## References to Resources Used
+- Terraform Documentation: https://www.terraform.io/docs
+- AWS Provider: https://registry.terraform.io/providers/hashicorp/aws/latest/docs
+- AWS Diagrams: AWS Architecture Icons
+- Terratest: https://terratest.gruntwork.io/ (for automated infrastructure testing with Go).
 
+---
+
+<!-- BEGIN_TF_DOCS -->
+
+## Inputs
+
+| Name | Description | Type | Default | Required |
+|------|-------------|------|---------|:--------:|
+| prefix | Prefix for naming the S3 buckets | `string` | n/a | yes |
+| region | AWS region where the infrastructure will be deployed | `string` | n/a | yes |
+
+## Outputs
+
+| Name | Description |
+|------|-------------|
+| images_bucket_name | The name of the S3 bucket for images |
+| logs_bucket_name | The name of the S3 bucket for logs |
+
+<!-- END_TF_DOCS -->
+
+Changes made:
+
+    <!-- BEGIN_TF_DOCS --> and <!-- END_TF_DOCS --> were inserted after the References to Resources Used section.
+
+    The Inputs and Outputs sections now contain the placeholders for the auto-generated Terraform documentation.
+
+Now, when you run terraform-docs to generate the documentation, it will automatically inject the module's inputs and outputs between these markers.
+Next Steps:
+
+    After making these changes, you can run terraform-docs to generate the documentation:
+
+terraform-docs markdown ./ --output-file README.md --mode inject
+
+This will inject the Terraform-generated content in the specified locations.

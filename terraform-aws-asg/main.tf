@@ -2,7 +2,7 @@ resource "aws_launch_template" "this" {
   name_prefix   = var.name
   image_id      = var.ami_id
   instance_type = var.instance_type
-  key_name      = var.key_name  # Ahora opcional
+  key_name      = var.key_name 
   user_data     = base64encode(var.user_data)
 
   iam_instance_profile {
@@ -22,7 +22,7 @@ resource "aws_launch_template" "this" {
 
       ebs {
         volume_size = var.volume_size
-        volume_type = "gp3"  # Default type, puedes agregar var si quieres
+        volume_type = "gp3"  
         delete_on_termination = true
       }
     }

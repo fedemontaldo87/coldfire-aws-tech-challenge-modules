@@ -70,7 +70,7 @@ module "vpc" {
 | azs | List of Availability Zones to use (e.g., ["us-east-1a", "us-east-1b"]) | `list(string)` | n/a | yes |
 | private_subnet_cidrs | List of CIDR blocks for private subnets | `list(string)` | n/a | yes |
 | public_subnet_cidrs | List of CIDR blocks for public subnets | `list(string)` | n/a | yes |
-| region | Región de AWS donde se desplegará la infraestructura | `string` | n/a | yes |
+| region | AWS region where the infrastructure will be deployed | `string` | n/a | yes |
 | vpc_cidr | CIDR block for the VPC | `string` | n/a | yes |
 
 ## Outputs

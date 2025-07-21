@@ -64,7 +64,7 @@ module "s3_bucket" {
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
 | prefix | Prefix for naming the S3 buckets | `string` | n/a | yes |
-| region | Región de AWS donde se desplegará la infraestructura | `string` | n/a | yes |
+| region | AWS region where the infrastructure will be deployed | `string` | n/a | yes |
 
 ## Outputs
 

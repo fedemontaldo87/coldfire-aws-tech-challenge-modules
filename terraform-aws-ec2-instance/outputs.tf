@@ -114,6 +114,7 @@ output "instance_count" {
 }
 
 output "instance_id" {
-  value = aws_instance.this.*.id
-  description = "ID de la instancia creada"
+  description = "ID of the created instance"
+  value       = aws_instance.this.id
 }
+

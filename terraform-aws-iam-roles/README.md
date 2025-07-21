@@ -76,25 +76,24 @@ module "asg_iam_role" {
 
 ## Inputs
 
-| Name | Description | Type | Default | Required |
-|------|-------------|------|---------|:--------:|
-| account_id | ID de cuenta AWS | `string` | n/a | yes |
-| assume_role_index | Tipo de entidad que asumirá el rol (ej: EC2, LAMBDA, etc). | `string` | `"EC2"` | no |
-| business_unit | Unidad de negocio para etiquetar los recursos. | `string` | n/a | yes |
-| create_role | Controla si se debe crear el rol IAM. | `bool` | `true` | no |
-| custom_policies | Lista de rutas a archivos JSON con políticas personalizadas. Los archivos deben estar en el directorio 'policies/' del módulo. | `list(string)` | `[]` | no |
-| environment | Ambiente (ej: dev, prod) para etiquetar los recursos. | `string` | n/a | yes |
-| external_id | ID externo opcional para trust policies cross-account. | `string` | `""` | no |
-| inline_policy_json | Política inline en formato JSON string | `string` | `""` | no |
-| max_session_duration | Duración máxima de la sesión del rol en segundos (entre 3600 y 43200). | `number` | `3600` | no |
-| named_custom_policies | Lista de objetos con nombre y contenido de políticas custom. Cada objeto debe tener 'name' (string) y 'policy' (string, contenido JSON). | ```list(object({ name = string policy = string }))``` | `[]` | no |
-| policies_arn | Lista de ARNs de políticas gestionadas por AWS para adjuntar al rol. | `list(string)` | `[]` | no |
-| region | Región de AWS | `string` | n/a | yes |
-| role_name | Nombre del rol IAM. | `string` | n/a | yes |
-| role_path | Ruta del rol IAM. | `string` | `"/"` | no |
-| tags | Mapa de tags adicionales a aplicar a los recursos. | `map(string)` | `{}` | no |
-| trusted_role_arns | Lista de ARNs de roles o usuarios que pueden asumir este rol (para confianza entre cuentas). | `list(string)` | `[]` | no |
-| trusted_services | Servicios AWS que pueden asumir el rol (ej: ec2.amazonaws.com). | `list(string)` | ```[ "ec2.amazonaws.com" ]``` | no |
+| account_id | AWS account ID | `string` | n/a | yes |
+| assume_role_index | Type of entity that will assume the role (e.g., EC2, LAMBDA, etc.). | `string` | `"EC2"` | no |
+| business_unit | Business unit for tagging resources. | `string` | n/a | yes |
+| create_role | Controls whether the IAM role should be created. | `bool` | `true` | no |
+| custom_policies | List of file paths for custom policies in JSON format. The files must be in the 'policies/' directory of the module. | `list(string)` | `[]` | no |
+| environment | Environment (e.g., dev, prod) for tagging resources. | `string` | n/a | yes |
+| external_id | Optional external ID for cross-account trust policies. | `string` | `""` | no |
+| inline_policy_json | Inline policy in JSON string format | `string` | `""` | no |
+| max_session_duration | Maximum session duration for the role in seconds (between 3600 and 43200). | `number` | `3600` | no |
+| named_custom_policies | List of objects with name and content of custom policies. Each object must have 'name' (string) and 'policy' (string, JSON content). | ```list(object({ name = string policy = string }))``` | `[]` | no |
+| policies_arn | List of AWS-managed policy ARNs to attach to the role. | `list(string)` | `[]` | no |
+| region | AWS region | `string` | n/a | yes |
+| role_name | IAM role name. | `string` | n/a | yes |
+| role_path | IAM role path. | `string` | `"/"` | no |
+| tags | Map of additional tags to apply to resources. | `map(string)` | `{}` | no |
+| trusted_role_arns | List of ARNs for roles or users that can assume this role (for cross-account trust). | `list(string)` | `[]` | no |
+| trusted_services | AWS services that can assume the role (e.g., ec2.amazonaws.com). | `list(string)` | ```[ "ec2.amazonaws.com" ]``` | no |
+
 
 ## Outputs
 

@@ -1,28 +1,28 @@
 variable "role_name" {
-  description = "Nombre del rol IAM."
+  description = "IAM role name."
   type        = string
 }
 
 variable "role_path" {
-  description = "Ruta del rol IAM."
+  description = "IAM role path."
   type        = string
   default     = "/"
 }
 
 variable "assume_role_index" {
-  description = "Tipo de entidad que asumirá el rol (ej: EC2, LAMBDA, etc)."
+  description = "Type of entity that will assume the role (e.g., EC2, LAMBDA, etc.)."
   type        = string
   default     = "EC2"
 }
 
 variable "custom_policies" {
-  description = "Lista de rutas a archivos JSON con políticas personalizadas. Los archivos deben estar en el directorio 'policies/' del módulo."
+  description = "List of paths to JSON files with custom policies. The files should be in the 'policies/' directory of the module."
   type        = list(string)
   default     = []
 }
 
 variable "named_custom_policies" {
-  description = "Lista de objetos con nombre y contenido de políticas custom. Cada objeto debe tener 'name' (string) y 'policy' (string, contenido JSON)."
+  description = "List of objects with name and content of custom policies. Each object must have 'name' (string) and 'policy' (string, JSON content)."
   type = list(object({
     name   = string
     policy = string
@@ -31,98 +31,98 @@ variable "named_custom_policies" {
 }
 
 variable "policies_arn" {
-  description = "Lista de ARNs de políticas gestionadas por AWS para adjuntar al rol."
+  description = "List of ARNs of AWS-managed policies to attach to the role."
   type        = list(string)
   default     = []
 }
 
 variable "create_role" {
-  description = "Controla si se debe crear el rol IAM."
+  description = "Controls whether the IAM role should be created."
   type        = bool
   default     = true
 }
 
 variable "max_session_duration" {
-  description = "Duración máxima de la sesión del rol en segundos (entre 3600 y 43200)."
+  description = "Maximum session duration for the role in seconds (between 3600 and 43200)."
   type        = number
   default     = 3600
   validation {
     condition     = var.max_session_duration >= 3600 && var.max_session_duration <= 43200
-    error_message = "La duración máxima de la sesión debe estar entre 3600 y 43200 segundos."
+    error_message = "The maximum session duration must be between 3600 and 43200 seconds."
   }
 }
 
 variable "environment" {
-  description = "Ambiente (ej: dev, prod) para etiquetar los recursos."
+  description = "Environment (e.g., dev, prod) for tagging resources."
   type        = string
 }
 
 variable "business_unit" {
-  description = "Unidad de negocio para etiquetar los recursos."
+  description = "Business unit for tagging resources."
   type        = string
 }
 
 variable "tags" {
-  description = "Mapa de tags adicionales a aplicar a los recursos."
+  description = "Map of additional tags to apply to resources."
   type        = map(string)
   default     = {}
 }
 
 variable "external_id" {
-  description = "ID externo opcional para trust policies cross-account."
+  description = "Optional external ID for cross-account trust policies."
   type        = string
   default     = ""
 }
 
 variable "trusted_services" {
-  description = "Servicios AWS que pueden asumir el rol (ej: ec2.amazonaws.com)."
+  description = "AWS services that can assume the role (e.g., ec2.amazonaws.com)."
   type        = list(string)
   default     = ["ec2.amazonaws.com"]
 }
 
 variable "trusted_role_arns" {
-  description = "Lista de ARNs de roles o usuarios que pueden asumir este rol (para confianza entre cuentas)."
+  description = "List of ARNs of roles or users that can assume this role (for cross-account trust)."
   type        = list(string)
   default     = []
 }
 
 variable "region" {
-  description = "Región de AWS"
+  description = "AWS region."
   type        = string
 }
 
 variable "account_id" {
-  description = "ID de cuenta AWS"
+  description = "AWS account ID."
   type        = string
 }
 
 variable "inline_policy_json" {
-  description = "Política inline en formato JSON string"
+  description = "Inline policy in JSON string format."
   type        = string
   default     = ""
 }
 
-# Agregado: Policies específicas para logs e images (JSON strings)
+# Added: Specific policies for logs and images (JSON strings)
 variable "logs_policy_json" {
-  description = "JSON policy for S3 logs write access (PutObject)"
+  description = "JSON policy for S3 logs write access (PutObject)."
   type        = string
-  default     = ""  # Setear default vacío; pasar en call si se usa
+  default     = ""  # Set default as empty; pass in call if used
 }
 
 variable "images_policy_json" {
-  description = "JSON policy for S3 images read access (GetObject)"
+  description = "JSON policy for S3 images read access (GetObject)."
   type        = string
   default     = ""
 }
 
 variable "create_ec2_logs_policy" {
-  description = "Indica si se debe crear una política de logs EC2 custom"
+  description = "Indicates whether to create a custom EC2 logs policy."
   type        = bool
   default     = false
 }
 
 variable "prefix" {
-  description = "Prefijo para los nombres de recursos"
+  description = "Prefix for resource names."
   type        = string
   default     = "coldfire"
 }
