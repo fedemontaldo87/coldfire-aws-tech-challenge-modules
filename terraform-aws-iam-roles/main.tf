@@ -131,8 +131,6 @@ resource "aws_iam_role_policy_attachment" "named_custom_asg_attachment" {
   policy_arn = each.value.arn
 }
 
-# Similar para file_custom y managed policies (attach a ambos roles si necesitas; ajusta según tu uso)
-
 # Inline policy (attach a ambos si se pasa)
 resource "aws_iam_role_policy" "inline_ec2" {
   count  = var.inline_policy_json != "" ? 1 : 0

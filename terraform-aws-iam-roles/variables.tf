@@ -114,3 +114,15 @@ variable "images_policy_json" {
   type        = string
   default     = ""
 }
+
+variable "create_ec2_logs_policy" {
+  description = "Indica si se debe crear una política de logs EC2 custom"
+  type        = bool
+  default     = false
+}
+
+variable "prefix" {
+  description = "Prefijo para los nombres de recursos"
+  type        = string
+  default     = "coldfire"
+}
