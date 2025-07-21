@@ -213,3 +213,9 @@ variable "secret_key" {
   type    = string
   default = "dummy"
 }
+
+variable "volume_size" {
+  description = "Size of the root volume in GB (added for custom top-level support)"
+  type        = number
+  default     = null  # Null para no obligarlo, usa default de AWS si no se pasa
+}

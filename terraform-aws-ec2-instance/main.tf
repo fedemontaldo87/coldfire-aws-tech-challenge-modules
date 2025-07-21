@@ -1,5 +1,17 @@
 locals {
   is_t_instance_type = replace(var.instance_type, "/^t(2|3|3a){1}\\..*$/", "1") == "1" ? true : false
+  
+  # Agregado: Si volume_size se pasa y root_block_device está vacío, crea un default con volume_size
+  effective_root_block_device = length(var.root_block_device) > 0 ? var.root_block_device : (
+    var.volume_size != null ? [
+      {
+        volume_size           = var.volume_size
+        volume_type           = "gp3"  # Default type, puedes cambiarlo
+        delete_on_termination = true   # Default, ajusta si quieres
+        encrypted             = false  # Default
+      }
+    ] : []
+  )
 }
 
 resource "aws_instance" "this" {
@@ -27,7 +39,7 @@ resource "aws_instance" "this" {
   ebs_optimized = var.ebs_optimized
 
   dynamic "root_block_device" {
-    for_each = var.root_block_device
+    for_each = local.effective_root_block_device  # Usamos el local efectivo
     content {
       delete_on_termination = lookup(root_block_device.value, "delete_on_termination", null)
       encrypted             = lookup(root_block_device.value, "encrypted", null)
@@ -103,5 +115,3 @@ resource "aws_instance" "this" {
     cpu_credits = local.is_t_instance_type ? var.cpu_credits : null
   }
 }
-
-
